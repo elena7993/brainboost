@@ -44,7 +44,7 @@ const Wrap = styled.div`
 
   button {
     all: unset;
-    width: 250px;
+    width: 300px;
     height: 50px;
     background-color: rgba(161, 106, 233, 0.6);
     font-size: 22px;

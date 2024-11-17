@@ -10,7 +10,7 @@ const Router = () => {
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/home" element={<Home />} />
-        <Route path="/quiz/:id" element={<Quiz />} />
+        <Route path="/quiz" element={<Quiz />} />
         <Route path="/oxnote" element={<Oxnote />} />
       </Routes>
     </HashRouter>

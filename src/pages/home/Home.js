@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { mainStyle } from "../../GlobalStyled";
 import { useEffect, useState } from "react";
 import { fetchCategories } from "../../api";
+import { useNavigate } from "react-router-dom";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -41,6 +42,12 @@ const LevelWrap = styled.div`
       font-size: 16px;
       background-color: #fff;
       text-align: center;
+      cursor: pointer;
+    }
+    button.active {
+      background-color: #a16ae9;
+      opacity: 0.5;
+      color: #fff;
     }
   }
 `;
@@ -52,6 +59,7 @@ const CategoryWrap = styled.div`
     font-weight: 600;
     margin-bottom: 10px;
   }
+
   .categorybox {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -62,13 +70,31 @@ const CategoryWrap = styled.div`
       height: 82px;
       border: 1px solid rgba(161, 106, 233, 0.5);
       border-radius: 10px;
-      font-size: 18px;
+      font-size: 16px;
       display: flex;
       justify-content: center;
       align-items: center;
       background-color: #fff;
+      cursor: pointer;
+    }
+    button.active {
+      background-color: #a16ae9;
+      opacity: 0.5;
+      color: #fff;
     }
   }
+`;
+
+const ViewMoreBtn = styled.button`
+  all: unset;
+  color: #7518fa;
+  opacity: 0.7;
+  font-size: 14px;
+  margin-top: 10px;
+  text-align: center;
+  display: flex;
+  justify-self: flex-end;
+  cursor: pointer;
 `;
 
 const QuizBtn = styled.button`
@@ -96,8 +122,8 @@ const QuizBtn = styled.button`
   } */
 
   &:hover img {
-    transform: scale(1.1); /* 이미지 살짝 확대 */
-    transition: transform 0.3s ease; /* 부드러운 확대 효과 */
+    transform: scale(1.1);
+    transition: transform 0.3s ease;
   }
 
   &:hover span {
@@ -114,7 +140,7 @@ const QuizBtn = styled.button`
     background-size: 200%;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    animation: rainbow 3s linear infinite; /* 그라데이션 이동 애니메이션 */
+    animation: rainbow 3s linear infinite;
     font-weight: 800;
   }
 
@@ -126,10 +152,10 @@ const QuizBtn = styled.button`
 
   @keyframes rainbow {
     0% {
-      background-position: 100% 0; /* 시작점 (오른쪽) */
+      background-position: 100% 0;
     }
     100% {
-      background-position: 0 0; /* 끝점 (왼쪽) */
+      background-position: 0 0;
     }
   }
 `;
@@ -147,6 +173,25 @@ const OxBtn = styled.button`
 
 const Home = () => {
   const [categories, setCategories] = useState([]);
+  const [viewAll, setViewAll] = useState(false);
+  const [selectedLevel, setSelectedLevel] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("");
+
+  const navigate = useNavigate();
+
+  const handleQuizStart = () => {
+    if (!selectedLevel) {
+      alert("Please select a level!");
+      return;
+    }
+    if (!selectedCategory) {
+      alert("Please select a category!");
+      return;
+    }
+    navigate("/quiz", {
+      state: { level: selectedLevel, category: selectedCategory },
+    });
+  };
 
   useEffect(() => {
     const loadCategories = async () => {
@@ -156,26 +201,43 @@ const Home = () => {
     loadCategories();
   }, []);
 
+  const viewCategories = viewAll ? categories : categories.slice(0, 12);
+
   return (
     <Wrapper>
       <h3>Welcome!</h3>
       <LevelWrap>
         <h4>Level</h4>
         <div className="levelBox">
-          <button>Easy</button>
-          <button>Medium</button>
-          <button>Hard</button>
+          {["Easy", "Medium", "Hard"].map((level) => (
+            <button
+              key={level}
+              onClick={() => setSelectedLevel(level)}
+              className={selectedLevel === level ? "active" : ""}
+            >
+              {level}
+            </button>
+          ))}
         </div>
       </LevelWrap>
       <CategoryWrap>
         <h4>Category</h4>
         <div className="categorybox">
-          {categories.map((category) => (
-            <button key={category.id}>{category.name}</button>
+          {viewCategories.map((category) => (
+            <button
+              key={category.id}
+              onClick={() => setSelectedCategory(category.name)}
+              className={selectedCategory === category.name ? "active" : ""}
+            >
+              {category.name}
+            </button>
           ))}
         </div>
+        {!viewAll && (
+          <ViewMoreBtn onClick={() => setViewAll(true)}>View all</ViewMoreBtn>
+        )}
       </CategoryWrap>
-      <QuizBtn>
+      <QuizBtn onClick={handleQuizStart}>
         <img
           src={`${process.env.PUBLIC_URL}/awesome_10917529.png`}
           alt="Brain_icon"

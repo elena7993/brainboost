@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import { mainStyle } from "../../GlobalStyled";
+import { useEffect, useState } from "react";
+import { fetchCategories } from "../../api";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -144,6 +146,16 @@ const OxBtn = styled.button`
 `;
 
 const Home = () => {
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    const loadCategories = async () => {
+      const data = await fetchCategories();
+      setCategories(data);
+    };
+    loadCategories();
+  }, []);
+
   return (
     <Wrapper>
       <h3>Welcome!</h3>
@@ -158,18 +170,9 @@ const Home = () => {
       <CategoryWrap>
         <h4>Category</h4>
         <div className="categorybox">
-          <button>1</button>
-          <button>2</button>
-          <button>3</button>
-          <button>4</button>
-          <button>5</button>
-          <button>6</button>
-          <button>7</button>
-          <button>8</button>
-          <button>9</button>
-          <button>10</button>
-          <button>11</button>
-          <button>12</button>
+          {categories.map((category) => (
+            <button key={category.id}>{category.name}</button>
+          ))}
         </div>
       </CategoryWrap>
       <QuizBtn>

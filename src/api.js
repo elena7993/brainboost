@@ -4,7 +4,7 @@ export const fetchQuizData = async (category, difficulty) => {
   const amount = 10;
   const url = `${BASE_URL}?amount=${amount}&category=${category}&difficulty=${difficulty}`;
   try {
-    const response = await fetch();
+    const response = await fetch(url);
     const data = await response.json();
     return data.results;
   } catch (error) {

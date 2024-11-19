@@ -244,7 +244,7 @@ const Home = () => {
         />
         <span>Let's Play Today's Quiz!</span>
       </QuizBtn>
-      <OxBtn>오답노트</OxBtn>
+      <OxBtn onClick={() => navigate("/oxnote")}>오답노트</OxBtn>
     </Wrapper>
   );
 };

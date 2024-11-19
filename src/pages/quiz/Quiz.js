@@ -45,7 +45,7 @@ const QuestionBox = styled.div`
 const AnswerBox = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 10px;
   button {
     all: unset;
     width: 350px;
@@ -103,10 +103,12 @@ const Quiz = () => {
     const loadQuizData = async () => {
       try {
         const data = await fetchQuizData(category, level);
-        setQuizData(data);
+        setQuizData(data || []);
         setIsLoading(false);
       } catch (error) {
         console.log("error", error);
+        setQuizData([]);
+        setIsLoading(false);
       }
     };
     loadQuizData();
@@ -118,20 +120,17 @@ const Quiz = () => {
     setSelectedAnswer(answer);
 
     if (answer !== correctAnswer) {
-      // 오답일 경우 저장
       setWrongAnswers((prev) => [
         ...prev,
         { ...quizData[currentQuestion], userAnswer: answer },
       ]);
     }
 
-    // 다음 문제로 넘어가기 (1초 지연)
     setTimeout(() => {
-      setSelectedAnswer(""); // 선택 상태 초기화
+      setSelectedAnswer("");
       if (currentQuestion < quizData.length - 1) {
         setCurrentQuestion((prev) => prev + 1);
       } else {
-        // 모든 질문 완료 후 결과 페이지로 이동
         navigate("/results", {
           state: { wrongAnswers, total: quizData.length },
         });
@@ -139,26 +138,21 @@ const Quiz = () => {
     }, 1000);
   };
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading || quizData.length === 0) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <Wrapper>
       <FontAwesomeIcon
         icon={faArrowLeft}
-        style={{ color: "#632CAB" }}
+        style={{ color: "#632CAB", marginBottom: "20px" }}
       ></FontAwesomeIcon>
       <QuestionBox>
         <p className="q_count">
-          Question {currentQuestion + 1} / {quizData.length}
+          Question {currentQuestion + 1} / {quizData.length || 0}
         </p>
-        <div
-          className="question"
-          dangerouslySetInnerHTML={{
-            __html: quizData[currentQuestion].question,
-          }}
-        >
-          {quizData[currentQuestion].question}
-        </div>
+        <div className="question">{quizData[currentQuestion].question}</div>
       </QuestionBox>
       <AnswerBox>
         {[
@@ -176,7 +170,7 @@ const Quiz = () => {
                     ? answer === quizData[currentQuestion].correct_answer
                       ? "#A16AE9" // 보라색 (정답)
                       : "red" // 빨간색 (오답)
-                    : "#fff", // 기본 색상
+                    : "transparent", // 기본 색상
                 color: selectedAnswer === answer ? "#fff" : "#000",
               }}
             >

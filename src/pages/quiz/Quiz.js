@@ -105,6 +105,7 @@ const Quiz = () => {
         const data = await fetchQuizData(category, level);
         setQuizData(data || []);
         setIsLoading(false);
+        console.log(data);
       } catch (error) {
         console.log("error", error);
         setQuizData([]);

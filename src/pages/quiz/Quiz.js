@@ -5,6 +5,7 @@ import { mainStyle } from "../../GlobalStyled";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { fetchQuizData } from "../../api";
+import { ClimbingBoxLoader } from "react-spinners";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -139,8 +140,20 @@ const Quiz = () => {
     }, 1000);
   };
 
-  if (isLoading || quizData.length === 0) {
-    return <div>Loading...</div>;
+  if (isLoading) {
+    return (
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100vh",
+          backgroundColor: "#f8f9fa",
+        }}
+      >
+        <ClimbingBoxLoader color="#6c63ff" size={15} />
+      </div>
+    );
   }
 
   return (

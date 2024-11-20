@@ -4,6 +4,7 @@ import Home from "./pages/home/Home";
 import Quiz from "./pages/quiz/Quiz";
 import Oxnote from "./pages/oxnote/Oxnote";
 import ResultPage from "./pages/ResultPage";
+import CheckWrongAnswers from "./pages/oxnote/CheckWrongAnswers";
 
 const Router = () => {
   return (
@@ -12,8 +13,9 @@ const Router = () => {
         <Route path="/" element={<Main />} />
         <Route path="/home" element={<Home />} />
         <Route path="/quiz" element={<Quiz />} />
-        <Route path="/oxnote" element={<Oxnote />} />
         <Route path="/results" element={<ResultPage />} />
+        <Route path="/oxnote" element={<Oxnote />} />
+        <Route path="/oxdetail" element={<CheckWrongAnswers />} />
       </Routes>
     </HashRouter>
   );

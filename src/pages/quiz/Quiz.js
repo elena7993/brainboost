@@ -182,9 +182,9 @@ const Quiz = () => {
                 backgroundColor:
                   selectedAnswer === answer
                     ? answer === quizData[currentQuestion].correct_answer
-                      ? "#A16AE9" // 보라색 (정답)
-                      : "red" // 빨간색 (오답)
-                    : "transparent", // 기본 색상
+                      ? "#A16AE9"
+                      : "red"
+                    : "transparent",
                 color: selectedAnswer === answer ? "#fff" : "#000",
               }}
             >

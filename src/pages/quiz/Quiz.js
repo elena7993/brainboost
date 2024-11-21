@@ -161,7 +161,7 @@ const Quiz = () => {
           justifyContent: "center",
           alignItems: "center",
           height: "100vh",
-          backgroundColor: "#f8f9fa",
+          backgroundColor: "#fff",
         }}
       >
         <h2>
@@ -194,6 +194,7 @@ const Quiz = () => {
       <FontAwesomeIcon
         icon={faArrowLeft}
         style={{ color: "#632CAB", marginBottom: "20px" }}
+        onClick={() => navigate(-1)}
       ></FontAwesomeIcon>
       <QuestionBox>
         <p className="q_count">

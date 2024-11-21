@@ -40,6 +40,7 @@ const LevelWrap = styled.div`
       border: 1px solid rgba(161, 106, 233, 0.5);
       border-radius: 25px;
       font-size: 16px;
+      opacity: 0.8;
       background-color: #fff;
       text-align: center;
       cursor: pointer;
@@ -71,9 +72,11 @@ const CategoryWrap = styled.div`
       border: 1px solid rgba(161, 106, 233, 0.5);
       border-radius: 10px;
       font-size: 16px;
+      opacity: 0.8;
       display: flex;
       justify-content: center;
       align-items: center;
+      text-align: center;
       background-color: #fff;
       cursor: pointer;
     }

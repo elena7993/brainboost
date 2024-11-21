@@ -9,14 +9,14 @@ const Wrapper = styled.div`
   margin: 0 auto;
   padding: 50px ${mainStyle.Padding_main};
   border: 1px solid rgba(161, 106, 233, 0.3);
-  border-radius: 15px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  box-shadow: 0 0 29px rgba(0, 0, 0, 0.1);
   img {
-    width: 292px;
-    height: 292px;
+    width: 250px;
+    height: 250px;
   }
   h4 {
     font-size: 24px;
@@ -27,7 +27,7 @@ const Wrapper = styled.div`
   p {
     font-size: 24px;
     font-weight: 700;
-    margin-bottom: 60px;
+    margin-bottom: 100px;
   }
 `;
 const BtnWrap = styled.div`

@@ -69,7 +69,7 @@ const Oxnote = () => {
         <button onClick={() => navigate(-1)}>
           <FontAwesomeIcon
             icon={faArrowLeft}
-            style={{ color: "#632CAB" }}
+            style={{ color: "#632CAB", cursor: "pointer" }}
           ></FontAwesomeIcon>
         </button>
 

@@ -5,6 +5,7 @@ import Quiz from "./pages/quiz/Quiz";
 import Oxnote from "./pages/oxnote/Oxnote";
 import ResultPage from "./pages/ResultPage";
 import CheckWrongAnswers from "./pages/oxnote/CheckWrongAnswers";
+import OxResultPage from "./pages/oxnote/OxResultPage";
 
 const Router = () => {
   return (
@@ -16,6 +17,7 @@ const Router = () => {
         <Route path="/results" element={<ResultPage />} />
         <Route path="/oxnote" element={<Oxnote />} />
         <Route path="/oxdetail" element={<CheckWrongAnswers />} />
+        <Route path="/oxresult" element={<OxResultPage />} />
       </Routes>
     </HashRouter>
   );

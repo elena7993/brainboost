@@ -2,7 +2,8 @@ import styled from "styled-components";
 import { mainStyle } from "../../GlobalStyled";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -64,21 +65,35 @@ const NextBtn = styled.button`
 
 const CheckWrongAnswers = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const { question, correctAnswer } = location.state || {};
   // 이게 전달받은 데이터임
+
+  const wrongAnswers = location.state?.wrongAnswers || [];
+  const [currentIndex, setCurrentIndex] = useState(0);
+  // const currentQuestion = wrongAnswers[currentIndex];
+
+  const handleNext = () => {
+    if (currentIndex < wrongAnswers.length - 1) {
+      setCurrentIndex((prev) => prev + 1);
+    } else {
+      navigate("/oxresult");
+    }
+  };
 
   return (
     <Wrapper>
       <FontAwesomeIcon
         icon={faArrowLeft}
-        style={{ color: "#632CAB", marginBottom: "20px" }}
+        onClick={() => navigate(-1)}
+        style={{ color: "#632CAB", marginBottom: "20px", cursor: "pointer" }}
       ></FontAwesomeIcon>
       <Q_ABox>
         <p className="q_count">Check Your Wrong Answer</p>
         <div className="question">{question || "No question available"}</div>
         <div className="answers">{correctAnswer || "No answer available"}</div>
       </Q_ABox>
-      <NextBtn>Next</NextBtn>
+      <NextBtn onClick={handleNext}>Next</NextBtn>
     </Wrapper>
   );
 };

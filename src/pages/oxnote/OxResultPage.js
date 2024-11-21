@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { mainStyle } from "../../GlobalStyled";
+import { useNavigate } from "react-router-dom";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -8,25 +9,27 @@ const Wrapper = styled.div`
   margin: 0 auto;
   padding: 50px ${mainStyle.Padding_main};
   border: 1px solid rgba(161, 106, 233, 0.3);
-  border-radius: 15px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  box-shadow: 0 0 29px rgba(0, 0, 0, 0.1);
   img {
-    width: 292px;
-    height: 292px;
+    width: 250px;
+    height: 250px;
   }
   h4 {
     font-size: 24px;
     font-weight: 700;
     margin-top: 20px;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
   }
   p {
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 700;
-    margin-bottom: 60px;
+  }
+  .text_2 {
+    margin-bottom: 100px;
   }
 `;
 const BtnWrap = styled.div`
@@ -46,6 +49,8 @@ const BtnWrap = styled.div`
 `;
 
 const OxResultPage = () => {
+  const navigate = useNavigate();
+
   return (
     <Wrapper>
       <img
@@ -54,7 +59,7 @@ const OxResultPage = () => {
       />
       <h4>Congrats!</h4>
       <p>You've mastered</p>
-      <p>all your wrong answers.</p>
+      <p className="text_2">all your wrong answers.</p>
 
       <BtnWrap>
         <button onClick={() => navigate("/home")}>홈</button>

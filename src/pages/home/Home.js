@@ -10,7 +10,7 @@ const Wrapper = styled.div`
   min-height: 100vh;
   margin: 0 auto;
   padding: 50px ${mainStyle.Padding_main};
-  border-radius: 15px;
+  /* border-radius: 15px; */
   background-color: #f5edfe;
   display: flex;
   flex-direction: column;

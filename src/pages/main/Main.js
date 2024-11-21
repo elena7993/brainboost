@@ -8,7 +8,7 @@ const Wrapper = styled.div`
   height: 100vh;
   margin: 0 auto;
   padding: 100px ${mainStyle.Padding_main};
-  border-radius: 15px;
+  /* border-radius: 15px; */
   background: rgb(248, 243, 255);
   background: linear-gradient(
     -20deg,

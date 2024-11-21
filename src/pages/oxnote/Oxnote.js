@@ -53,11 +53,14 @@ const Oxnote = () => {
 
   const { state } = location;
   const wrongAnswers = state?.wrongAnswers || [];
+  // 오답데이터 가져오는 것
 
   // console.log(wrongAnswers);
 
-  const handleQuestionClick = (question) => {
-    navigate("/quiz", { state: { question } });
+  const handleQuestionClick = (item) => {
+    navigate("/oxdetail", {
+      state: { question: item.question, correctAnswer: item.correct_answer },
+    });
   };
 
   return (

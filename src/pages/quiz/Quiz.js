@@ -69,30 +69,13 @@ const AnswerBox = styled.div`
   }
 `;
 
-// const NextBtn = styled.button`
-//   all: unset;
-//   width: 62px;
-//   height: 25px;
-//   background-color: rgba(1161, 106, 233, 0.8);
-//   color: #fff;
-//   border-radius: 20px;
-//   opacity: 0.7;
-//   font-size: 14px;
-//   margin-top: 10px;
-//   /* text-align: center; */
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   margin-left: auto;
-//   cursor: pointer;
-// `;
-
 const Quiz = () => {
   const [quizData, setQuizData] = useState([]);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState("");
   const [wrongAnswers, setWrongAnswers] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [shuffledAnswers, setShuffledAnswers] = useState([]);
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -115,6 +98,20 @@ const Quiz = () => {
     };
     loadQuizData();
   }, [category, level]);
+
+  useEffect(() => {
+    if (quizData[currentQuestion]) {
+      const answers = [
+        ...quizData[currentQuestion].incorrect_answers,
+        quizData[currentQuestion].correct_answer,
+      ];
+      const shuffled = answers.sort(() => Math.random() - 0.5);
+      // 랜덤 순서 생성
+      setShuffledAnswers(shuffled);
+      // 랜덤 순서를 상태로 저장
+    }
+  }, [quizData, currentQuestion]);
+  // currentQuestion이 변경될 때만 실행함
 
   const handleAnswerClick = (answer) => {
     const correctAnswer = quizData[currentQuestion].correct_answer;
@@ -156,6 +153,42 @@ const Quiz = () => {
     );
   }
 
+  if (!quizData.length) {
+    return (
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100vh",
+          backgroundColor: "#f8f9fa",
+        }}
+      >
+        <h2>
+          No quiz data available.
+          <br />
+          Please try again.
+        </h2>
+      </div>
+    );
+  }
+
+  if (!quizData[currentQuestion]) {
+    return (
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100vh",
+          backgroundColor: "#f8f9fa",
+        }}
+      >
+        <h2>Invalid question data.</h2>
+      </div>
+    );
+  }
+
   return (
     <Wrapper>
       <FontAwesomeIcon
@@ -166,9 +199,14 @@ const Quiz = () => {
         <p className="q_count">
           Question {currentQuestion + 1} / {quizData.length || 0}
         </p>
-        <div className="question">{quizData[currentQuestion].question}</div>
+        <div
+          className="question"
+          dangerouslySetInnerHTML={{
+            __html: quizData[currentQuestion].question,
+          }}
+        ></div>
       </QuestionBox>
-      <AnswerBox>
+      {/* <AnswerBox>
         {[
           ...quizData[currentQuestion].incorrect_answers,
           quizData[currentQuestion].correct_answer,
@@ -192,8 +230,27 @@ const Quiz = () => {
               <span className="answers">{answer}</span>
             </button>
           ))}
+      </AnswerBox> */}
+      <AnswerBox>
+        {shuffledAnswers.map((answer, index) => (
+          <button
+            key={index}
+            onClick={() => handleAnswerClick(answer)}
+            style={{
+              backgroundColor:
+                selectedAnswer === answer
+                  ? answer === quizData[currentQuestion].correct_answer
+                    ? "#A16AE9"
+                    : "red"
+                  : "transparent",
+              color: selectedAnswer === answer ? "#fff" : "#000",
+            }}
+          >
+            <span className="num">{String.fromCharCode(65 + index)}</span>{" "}
+            <span className="answers">{answer}</span>
+          </button>
+        ))}
       </AnswerBox>
-      {/* <NextBtn>Next</NextBtn> */}
     </Wrapper>
   );
 };

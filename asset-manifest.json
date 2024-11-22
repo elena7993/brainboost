@@ -1,0 +1,10 @@
+{
+  "files": {
+    "main.js": "/brainboost/static/js/main.5d81fee6.js",
+    "index.html": "/brainboost/index.html",
+    "main.5d81fee6.js.map": "/brainboost/static/js/main.5d81fee6.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.5d81fee6.js"
+  ]
+}

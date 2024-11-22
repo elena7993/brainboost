@@ -43,5 +43,5 @@ BrainBoost
 
 ## **7. 프로젝트 URL**
 
-[BrainBoost 링크 바로가기](#)  
-_(배포 후 URL 추가 예정)_
+[https://elena7993.github.io/brainboost/#/](#)  
+

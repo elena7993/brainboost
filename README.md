@@ -6,6 +6,19 @@
 
 브레인부스트 바로가기: <https://elena7993.github.io/brainboost/>
 
+### 1. 앱 이미지
+
+<div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;">
+<img src="./public/bb_images/bb_home.png" alt="홈화면" width="300" height="500">
+<img src="./public/bb_images/bb_main.png" alt="메인화면" width="300" height="500">
+<img src="./public/bb_images/bb_quiz.png" alt="퀴즈화면" width="300" height="500">
+<img src="./public/bb_images/bb_feedback.png" alt="피드백화면" width="300" height="500">
+<img src="./public/bb_images/bb_ox.png" alt="오답노트화면" width="300" height="500">
+
+<div>
+
+<p style="margin: 20px 0;"></p>
+
 ### 2.목적
 
 - 사용자가 다양한 카테고리와 난이도의 퀴즈를 통해 영어를 재미있게 학습하고 지식을 확장할 수 있도록 돕는다.
